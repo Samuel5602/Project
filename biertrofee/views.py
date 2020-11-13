@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from . import util
 
-from .models import Player, TeamName, Poul, Team
+from .models import Player, TeamName, Poul, Team, Match
 
 # Create your views here.
 def index(request):
@@ -34,8 +34,8 @@ def poule(request, id):
     })
 
 def matches(request, id):
-    matches = util.create_matches(Team.objects.filter(poule=id))
+    util.create_matches(Team.objects.filter(poule=id))
     return render(request, "biertrofee/matches.html", {
-        "matches": matches,
+        "matches": Match.objects.all(),
         "poule": Poul.objects.get(pk=id)
     })
