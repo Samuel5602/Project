@@ -1,0 +1,30 @@
+{% extends 'biertrofee/layout.html' %}
+
+{% block body %}
+    <h1>Wedstrijden Poule {{ poule }}</h1>
+
+    <table>
+        <thead>
+            <th>Home</th>
+            <th>away</th>
+            <th>Home Score</th>
+            <th>Away Score</th>
+        </thead>
+        <tbody>
+            {% for match in matches %}
+                <tr>
+                    <td>{{ match.0 }}</td>
+                    <td>{{ match.1 }}</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td>Mislukt</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'poule' poule.id %}">Terug</a>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'biertrofee/layout.html' %}
+
+{% block body %}
+    <h1>Spelers</h1>
+    <ul>
+        {% for player in players %}
+    <li><a href="{% url 'player' player %}" style="color: black">{{ player }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'index' %}">Terug</a>
+{% endblock %}

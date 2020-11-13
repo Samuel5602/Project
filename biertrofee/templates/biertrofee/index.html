@@ -1,0 +1,11 @@
+{% extends 'biertrofee/layout.html' %}
+
+{% block body %}
+    <h1>biertrofee</h1>
+
+    <ul>
+        <li><a href="{% url 'players' %}">Spelers</a></li>
+        <li><a href="{% url 'poules' %}">Poules</a></li>
+        <li>Wedstrijden</li>
+    </ul>
+{% endblock %}

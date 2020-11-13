@@ -1,0 +1,13 @@
+{% extends 'biertrofee/layout.html' %}
+
+{% block body %}
+    <h1>{{ player }}</h1>
+
+    <ul>
+        {% for team in teams %}
+            <li>{{ team }} ({{ team.abbreviation }})</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'players' %}">Terug</a>
+{% endblock %}

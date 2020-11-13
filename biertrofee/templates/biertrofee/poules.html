@@ -1,0 +1,13 @@
+{% extends 'biertrofee/layout.html' %}
+
+{% block body %}
+    <h1>Poules</h1>
+
+    <ul>
+        {% for poule in poules %}
+        <li><a href="{% url 'poule' poule.id %}" style="color:black">Poule {{ poule }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'index' %}">Terug</a>
+{% endblock %}
