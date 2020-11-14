@@ -26,5 +26,17 @@
         </tbody>
     </table>
 
+    <form action="{% url 'score' poule.id %}" method="post">
+        {% csrf_token %}
+        <select name="match">
+            {% for match in matches %}
+                <option value="{{ match.id }}">{{ match }}</option>
+            {% endfor %}
+        </select>
+        <input type="number" min="0" name="home_score" value="0">
+        <input type="number" min="0" name="away_score" value="0">
+        <input type="submit">
+    </form>
+
     <a href="{% url 'poule' poule.id %}">Terug</a>
 {% endblock %}
