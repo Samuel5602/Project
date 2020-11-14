@@ -1,0 +1,12 @@
+{% extends 'biertrofee/layout.html' %}
+
+{% block body %}
+    <h1>Config</h1>
+
+    <ul>
+        <li>Create tournament</li>
+        <li><a href="{% url 'create_matches' %}">Create matches</a></li>
+    </ul>
+
+    <a href="{% url 'logout' %}">Log out</a>
+{% endblock %}

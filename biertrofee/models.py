@@ -37,9 +37,9 @@ class Match(models.Model):
     away = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="away")
     home_score = models.IntegerField(default=0)
     away_score = models.IntegerField(default=0)
-    #poule attribute, to sort when asking for matches in poule html
+    poule = models.ForeignKey(Poul, on_delete=models.CASCADE, related_name="match_poule", default=1)
 
     def __str__(self):
-        return f"{self.home} - {self.away}"
+        return f"{self.home.team.name} - {self.away.team.name}"
 
     
