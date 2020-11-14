@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth import authenticate, login, logout
 
 from . import util
 
@@ -39,3 +40,24 @@ def matches(request, id):
         "matches": Match.objects.all(),
         "poule": Poul.objects.get(pk=id)
     })
+
+def login_view(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return render(request, "biertrofee/config.html")
+        else:
+            return render(request, "biertrofee/index.html", {
+                "message": "Invalid credentials."
+            })
+    return render(request, "biertrofee/index.html")
+
+def config(request):
+    pass
+
+def logout_view(request):
+    logout(request)
+    return render(request, "biertrofee/index.html")

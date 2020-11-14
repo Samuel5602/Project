@@ -40,6 +40,6 @@ class Match(models.Model):
     #poule attribute, to sort when asking for matches in poule html
 
     def __str__(self):
-        return f"{self.home} - {self.away}"
+        return f"{self.home.team.name} - {self.away.team.name}"
 
     
