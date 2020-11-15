@@ -38,6 +38,7 @@ class Match(models.Model):
     home_score = models.IntegerField(default=0)
     away_score = models.IntegerField(default=0)
     poule = models.ForeignKey(Poul, on_delete=models.CASCADE, related_name="match_poule", default=1)
+    filled_in = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.home.team.name} - {self.away.team.name}"

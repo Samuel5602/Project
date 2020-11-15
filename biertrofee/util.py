@@ -33,6 +33,7 @@ def fix_score(home, away, match):
 
     match.home_score = home
     match.away_score = away
+    match.filled_in = True
     match.save()
     
 def reset():
