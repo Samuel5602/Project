@@ -15,8 +15,19 @@
                 <tr>
                     <td>{{ match.home.team.name }}</td>
                     <td>{{ match.away.team.name }}</td>
-                    <td>0</td>
-                    <td>0</td>
+                    {% if not match.filled_in %}
+                        <form action="{% url 'score' poule.id %}" method="post">
+                            {% csrf_token %}
+                            <input hidden value="{{ match.id }}" name="match">
+                            <td><input type="number" min="0" name="home_score" value="0"></td>
+                            <td><input type="number" min="0" name="away_score" value="0"></td>
+                            <td><input type="submit" value="update"></td>
+                            
+                        </form>
+                    {% else %}
+                        <td>{{ match.home_score }}</td>
+                        <td>{{ match.away_score }}</td>
+                    {% endif %}
                 </tr>
             {% empty %}
                 <tr>
@@ -25,6 +36,18 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <!-- <form action="{% url 'score' poule.id %}" method="post">
+        {% csrf_token %}
+        <select name="match">
+            {% for match in matches %}
+                <option value="{{ match.id }}">{{ match }}</option>
+            {% endfor %}
+        </select>
+        <input type="number" min="0" name="home_score" value="0">
+        <input type="number" min="0" name="away_score" value="0">
+        <input type="submit">
+    </form> -->
 
     <a href="{% url 'poule' poule.id %}">Terug</a>
 {% endblock %}

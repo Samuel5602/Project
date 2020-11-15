@@ -8,4 +8,13 @@
         <li><a href="{% url 'poules' %}">Poules</a></li>
         <!-- <li>Wedstrijden</li> -->
     </ul>
+
+    <div>
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <input autofocus type="text" name="username" placeholder="Username">
+            <input type="password" name="password", placeholder="Password">
+            <input type="submit" value="login">
+        </form>
+    </div>
 {% endblock %}

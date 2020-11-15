@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 from . import util
 
@@ -27,15 +30,59 @@ def poules(request):
     })
 
 def poule(request, id):
-    teams = Team.objects.filter(poule=id)
+    teams = Team.objects.filter(poule=id).order_by('points').reverse
     return render(request, 'biertrofee/poule.html', {
         "teams": teams,
         "poule": Poul.objects.get(pk=id)
     })
 
 def matches(request, id):
-    util.create_matches(Team.objects.filter(poule=id))
     return render(request, "biertrofee/matches.html", {
-        "matches": Match.objects.all(),
+        "matches": Match.objects.filter(poule=id),
         "poule": Poul.objects.get(pk=id)
+    })
+
+def score(request, id):
+    if request.method == "POST":
+        home_score = request.POST["home_score"]
+        away_score = request.POST["away_score"]
+        match = request.POST["match"]
+        match_object = Match.objects.get(id=match)
+        util.fix_score(home_score, away_score, match_object)
+        return HttpResponseRedirect(reverse("matches", args=[id]))
+        # return render(request, "biertrofee/matches.html")
+
+
+def login_view(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return render(request, "biertrofee/config.html")
+        else:
+            return render(request, "biertrofee/index.html", {
+                "message": "Invalid credentials."
+            })
+    return render(request, "biertrofee/index.html")
+
+def config(request):
+    pass
+
+def logout_view(request):
+    logout(request)
+    return render(request, "biertrofee/index.html")
+
+def create_matches(request):
+    for i in range(1, len(Poul.objects.all())+1):
+        util.create_matches(Team.objects.filter(poule=i), Poul.objects.get(id=i))
+    return render(request, "biertrofee/config.html", {
+        "message": "Teams Created"
+    })
+
+def reset(request):
+    util.reset()
+    return render(request, "biertrofee/config.html", {
+        "message": "Reset completed"
     })
