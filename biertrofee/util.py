@@ -45,4 +45,5 @@ def reset():
     for match in Match.objects.all():
         match.home_score = 0
         match.away_score = 0
+        match.filled_in = False
         match.save()

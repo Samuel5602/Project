@@ -1,14 +1,6 @@
 {% extends 'biertrofee/layout.html' %}
 
 {% block body %}
-    <h1>biertrofee</h1>
-
-    <ul>
-        <li><a href="{% url 'players' %}">Spelers</a></li>
-        <li><a href="{% url 'poules' %}">Poules</a></li>
-        <!-- <li>Wedstrijden</li> -->
-    </ul>
-
     <div>
         <form action="{% url 'login' %}" method="post">
             {% csrf_token %}
@@ -17,4 +9,11 @@
             <input type="submit" value="login">
         </form>
     </div>
+    <h1>biertrofee</h1>
+
+    <ul>
+        <li><a href="{% url 'players' %}">Spelers</a></li>
+        <li><a href="{% url 'poules' %}">Poules</a></li>
+        <!-- <li>Wedstrijden</li> -->
+    </ul>
 {% endblock %}
