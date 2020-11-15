@@ -77,4 +77,12 @@ def logout_view(request):
 def create_matches(request):
     for i in range(1, len(Poul.objects.all())+1):
         util.create_matches(Team.objects.filter(poule=i), Poul.objects.get(id=i))
-    return render(request, "biertrofee/config.html")
+    return render(request, "biertrofee/config.html", {
+        "message": "Teams Created"
+    })
+
+def reset(request):
+    util.reset()
+    return render(request, "biertrofee/config.html", {
+        "message": "Reset completed"
+    })

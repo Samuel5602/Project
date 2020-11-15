@@ -16,4 +16,5 @@ urlpatterns = [
     path("logout", views.logout_view, name="logout"),
     path("config", views.config, name="config"),
     path("login/create_matches", views.create_matches, name="create_matches"),
+    path("login/reset", views.reset, name="reset")
 ]

@@ -3,9 +3,14 @@
 {% block body %}
     <h1>Config</h1>
 
+    {% if message %}
+        <h2>{{ message }}</h2>
+    {% endif %}
+
     <ul>
         <li>Create tournament</li>
         <li><a href="{% url 'create_matches' %}">Create matches</a></li>
+        <li><a href="{% url 'reset' %}">Reset</a></li>
     </ul>
 
     <a href="{% url 'logout' %}">Log out</a>

@@ -12,8 +12,8 @@ def fix_score(home, away, match):
     home_team = match.home
     away_team = match.away
 
-    home = int(float(home))
-    away = int(float(away))
+    home = int(home)
+    away = int(away)
 
     dif = abs(home-away)
     if home > away:
@@ -35,3 +35,13 @@ def fix_score(home, away, match):
     match.away_score = away
     match.save()
     
+def reset():
+    for team in Team.objects.all():
+        team.points = 0
+        team.goals = 0
+        team.save()
+    
+    for match in Match.objects.all():
+        match.home_score = 0
+        match.away_score = 0
+        match.save()
